@@ -10,6 +10,8 @@
 #import "PhoneObject.h"
 #import "Utils.h"
 
+#define BRAZILIAN_COUNTRY_CODE          @"+55"
+
 @interface ViewController ()
 
 @end
@@ -85,16 +87,17 @@
         NSLog(@"-%@",objPhone.phone);
         
         // Check if row contains phone Country Code (Brazil)
-        if ([[objPhone.phone substringWithRange:NSMakeRange(2, 3)]isEqualToString:@"+55"]) {
+        if ([[objPhone.phone substringWithRange:NSMakeRange(2, 3)]isEqualToString:BRAZILIAN_COUNTRY_CODE]) {
             
             // Extract data from the row
-            NSString *ddd1=[objPhone.phone substringWithRange:NSMakeRange(0, 2)];
-            NSString *ddd2=[objPhone.phone substringWithRange:NSMakeRange(5, 2)];
+            NSString *areaCode1=[objPhone.phone substringWithRange:NSMakeRange(0, 2)];
+            NSString *areaCode2=[objPhone.phone substringWithRange:NSMakeRange(5, 2)];
             
-            // Check if it is a valid ddd
-            if ([Utils isValidAreaCode:ddd1] && [ddd1 isEqualToString:ddd2]) {
+            // Check if it is a valid area code for rule #1
+            if ([Utils isValidAreaCode:areaCode1] && [areaCode1 isEqualToString:areaCode2]) {
 
-                    NSLog(@"PROCESSING phone");
+                NSLog(@"PROCESSING phone");
+                NSString *outputTextRow=[self generateOutputWithString:objPhone.phone];
 
             }
             
@@ -106,6 +109,13 @@
     }
     
     
+}
+
+
+-(NSString *)generateOutputWithString:(NSString *)textRow{
+    
+    
+    return @"";
 }
 
 
