@@ -7,8 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Database.h"
 
 @interface ViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+
+
+
+@property (nonatomic,strong) Database *database;
+
+
 
 
 @end

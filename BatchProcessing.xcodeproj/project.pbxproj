@@ -14,6 +14,10 @@
 		9C90C6F21B43083400E8FD0B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C90C6F11B43083400E8FD0B /* Images.xcassets */; };
 		9C90C6F51B43083500E8FD0B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C90C6F31B43083500E8FD0B /* LaunchScreen.xib */; };
 		9C90C7011B43083500E8FD0B /* BatchProcessingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C90C7001B43083500E8FD0B /* BatchProcessingTests.m */; };
+		9C90C70C1B430E4500E8FD0B /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C90C70B1B430E4500E8FD0B /* libsqlite3.0.dylib */; };
+		9C90C7151B430EEC00E8FD0B /* Database.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C90C7141B430EEC00E8FD0B /* Database.m */; };
+		9C90C7171B43145E00E8FD0B /* Phones.db in Resources */ = {isa = PBXBuildFile; fileRef = 9C90C7161B43145E00E8FD0B /* Phones.db */; };
+		9C90C71D1B4317B700E8FD0B /* PhoneObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 9C90C71C1B4317B700E8FD0B /* PhoneObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,12 @@
 		9C90C6FA1B43083500E8FD0B /* BatchProcessingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BatchProcessingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C90C6FF1B43083500E8FD0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C90C7001B43083500E8FD0B /* BatchProcessingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BatchProcessingTests.m; sourceTree = "<group>"; };
+		9C90C70B1B430E4500E8FD0B /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		9C90C7131B430EEC00E8FD0B /* Database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Database.h; sourceTree = "<group>"; };
+		9C90C7141B430EEC00E8FD0B /* Database.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Database.m; sourceTree = "<group>"; };
+		9C90C7161B43145E00E8FD0B /* Phones.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Phones.db; path = ../Phones.db; sourceTree = "<group>"; };
+		9C90C71B1B4317B700E8FD0B /* PhoneObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneObject.h; sourceTree = "<group>"; };
+		9C90C71C1B4317B700E8FD0B /* PhoneObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C90C70C1B430E4500E8FD0B /* libsqlite3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +74,7 @@
 		9C90C6D81B43083100E8FD0B = {
 			isa = PBXGroup;
 			children = (
+				9C90C70D1B430E5600E8FD0B /* Frameworks */,
 				9C90C6E31B43083100E8FD0B /* BatchProcessing */,
 				9C90C6FD1B43083500E8FD0B /* BatchProcessingTests */,
 				9C90C6E21B43083100E8FD0B /* Products */,
@@ -81,13 +93,11 @@
 		9C90C6E31B43083100E8FD0B /* BatchProcessing */ = {
 			isa = PBXGroup;
 			children = (
-				9C90C6E81B43083200E8FD0B /* AppDelegate.h */,
-				9C90C6E91B43083200E8FD0B /* AppDelegate.m */,
-				9C90C6EB1B43083200E8FD0B /* ViewController.h */,
-				9C90C6EC1B43083200E8FD0B /* ViewController.m */,
-				9C90C6EE1B43083300E8FD0B /* Main.storyboard */,
-				9C90C6F11B43083400E8FD0B /* Images.xcassets */,
-				9C90C6F31B43083500E8FD0B /* LaunchScreen.xib */,
+				9C90C7121B430ED600E8FD0B /* Classes */,
+				9C90C7111B430EBB00E8FD0B /* Images */,
+				9C90C7101B430EA900E8FD0B /* Storyboards */,
+				9C90C70F1B430E9A00E8FD0B /* Controllers */,
+				9C90C70E1B430E8E00E8FD0B /* Root */,
 				9C90C6E41B43083100E8FD0B /* Supporting Files */,
 			);
 			path = BatchProcessing;
@@ -96,6 +106,7 @@
 		9C90C6E41B43083100E8FD0B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9C90C7161B43145E00E8FD0B /* Phones.db */,
 				9C90C6E51B43083100E8FD0B /* Info.plist */,
 				9C90C6E61B43083100E8FD0B /* main.m */,
 			);
@@ -117,6 +128,61 @@
 				9C90C6FF1B43083500E8FD0B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9C90C70D1B430E5600E8FD0B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C90C70B1B430E4500E8FD0B /* libsqlite3.0.dylib */,
+			);
+			name = Frameworks;
+			path = BatchProcessing;
+			sourceTree = "<group>";
+		};
+		9C90C70E1B430E8E00E8FD0B /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				9C90C6E81B43083200E8FD0B /* AppDelegate.h */,
+				9C90C6E91B43083200E8FD0B /* AppDelegate.m */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		9C90C70F1B430E9A00E8FD0B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9C90C6EB1B43083200E8FD0B /* ViewController.h */,
+				9C90C6EC1B43083200E8FD0B /* ViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		9C90C7101B430EA900E8FD0B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				9C90C6EE1B43083300E8FD0B /* Main.storyboard */,
+				9C90C6F31B43083500E8FD0B /* LaunchScreen.xib */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		9C90C7111B430EBB00E8FD0B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				9C90C6F11B43083400E8FD0B /* Images.xcassets */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		9C90C7121B430ED600E8FD0B /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9C90C7131B430EEC00E8FD0B /* Database.h */,
+				9C90C7141B430EEC00E8FD0B /* Database.m */,
+				9C90C71B1B4317B700E8FD0B /* PhoneObject.h */,
+				9C90C71C1B4317B700E8FD0B /* PhoneObject.m */,
+			);
+			name = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C90C7171B43145E00E8FD0B /* Phones.db in Resources */,
 				9C90C6F01B43083300E8FD0B /* Main.storyboard in Resources */,
 				9C90C6F51B43083500E8FD0B /* LaunchScreen.xib in Resources */,
 				9C90C6F21B43083400E8FD0B /* Images.xcassets in Resources */,
@@ -221,7 +288,9 @@
 			files = (
 				9C90C6ED1B43083200E8FD0B /* ViewController.m in Sources */,
 				9C90C6EA1B43083200E8FD0B /* AppDelegate.m in Sources */,
+				9C90C7151B430EEC00E8FD0B /* Database.m in Sources */,
 				9C90C6E71B43083100E8FD0B /* main.m in Sources */,
+				9C90C71D1B4317B700E8FD0B /* PhoneObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
