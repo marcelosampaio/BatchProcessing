@@ -78,10 +78,6 @@
     // The writable database does not exist, so copy the default to the appropriate location.
     NSString *defaultDBPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:DATABASE_IDENTIFIER];
     
-    
-    NSLog(@"souce: %@     target: %@",defaultDBPath,writableDBPath);
-    
-    
     success = [fileManager copyItemAtPath:defaultDBPath toPath:writableDBPath error:&error];
     if (!success) {
         NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
@@ -101,7 +97,7 @@
     NSMutableArray *objectArray=[[NSMutableArray alloc]init];
     
     // Get timeline from database
-    NSString *sql = [NSString stringWithFormat:@"select id,phone from Phones"];
+    NSString *sql = [NSString stringWithFormat:@"select * from Phones"];
     
     NSLog(@"SQL=%@",sql);
     

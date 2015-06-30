@@ -12,12 +12,8 @@
 @interface ViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-
-
-
-
 @property (nonatomic,strong) Database *database;
-
+@property (nonatomic,strong) NSArray *phoneObjects;
 
 
 

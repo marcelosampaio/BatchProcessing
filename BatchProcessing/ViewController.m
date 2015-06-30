@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PhoneObject.h"
+#import "Utils.h"
 
 @interface ViewController ()
 
@@ -16,6 +17,7 @@
 @implementation ViewController
 @synthesize database;
 @synthesize activityIndicator;
+@synthesize phoneObjects;
 
 #pragma mark - View Life Cycle
 - (void)viewDidLoad {
@@ -49,12 +51,10 @@
     
     
     // get phones from database
-    NSMutableArray *phoneObjects=[self.database getPhones];
+    self.phoneObjects=[self.database getPhones];
     
-    // iterate it
-    for (PhoneObject *phoneObject in phoneObjects) {
-        NSLog(@"---- id: %@         phone Number: %@",phoneObject.phoneId,phoneObject.phone);
-    }
+    // batch processing itself
+    [self batchProcessingWithSource:self.phoneObjects];
     
     // stop activity indicator
     [self stopAnimatingActivityIndicator];
@@ -72,5 +72,46 @@
     self.activityIndicator.hidden=YES;
 }
 
+#pragma mark - Main Process
+-(void)batchProcessingWithSource:(NSArray *)source{
+
+    for (PhoneObject *objPhone in source) {
+        
+        // ------------------------------------------------
+        // RULE #1
+        // Search for phones with this pattern: "DDD+55DDD"
+        // ------------------------------------------------
+        
+        NSLog(@"-%@",objPhone.phone);
+        
+        // Check if row contains phone Country Code (Brazil)
+        if ([[objPhone.phone substringWithRange:NSMakeRange(2, 3)]isEqualToString:@"+55"]) {
+            
+            // Extract data from the row
+            NSString *ddd1=[objPhone.phone substringWithRange:NSMakeRange(0, 2)];
+            NSString *ddd2=[objPhone.phone substringWithRange:NSMakeRange(5, 2)];
+            
+            // Check if it is a valid ddd
+            if ([Utils isValidAreaCode:ddd1] && [ddd1 isEqualToString:ddd2]) {
+
+                    NSLog(@"PROCESSING phone");
+
+            }
+            
+            
+            
+
+        }
+        
+    }
+    
+    
+}
+
+
+//NSLog([@"1234567890" substringWithRange:NSMakeRange(3, 5)]);
+
+//NSString *str = @"A. rahul VyAs";
+//NSString *newStr = [str substringWithRange:NSMakeRange(3, [str length]-3)];
 
 @end
