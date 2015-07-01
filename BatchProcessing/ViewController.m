@@ -97,25 +97,18 @@
             if ([Utils isValidAreaCode:areaCode1] && [areaCode1 isEqualToString:areaCode2]) {
 
                 NSLog(@"PROCESSING phone");
-                NSString *outputTextRow=[self generateOutputWithString:objPhone.phone];
+                [self generateOutputWithString:objPhone.phone];
 
             }
-            
-            
-            
-
         }
-        
     }
-    
-    
 }
 
 
--(NSString *)generateOutputWithString:(NSString *)textRow{
+-(void)generateOutputWithString:(NSString *)textRow{
+    // Rule #1 - Output results
     
     
-    return @"";
 }
 
 
