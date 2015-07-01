@@ -108,7 +108,7 @@
         picker.mailComposeDelegate = self;
         
         
-        [picker setSubject:[NSString stringWithFormat:@"MyPath database"]];
+        [picker setSubject:[NSString stringWithFormat:@"Script On Demand"]];
         [picker setMessageBody:[self messageBody] isHTML:YES];
 //        [picker addAttachmentData:[self.database getDatabaseFile] mimeType:@"application/x-sqlite3" fileName:@"MyPath.db"];
         
@@ -129,8 +129,11 @@
     NSString *phonePrefix=[phoneNUmber substringWithRange:NSMakeRange(0, 4)];
     NSString *phoneSufix=[phoneNUmber substringWithRange:NSMakeRange(4, 4)];
     
-    NSString *phoneString=[NSString stringWithFormat:@"(%@) %@-%@",areaCode,phonePrefix,phoneSufix];
-    NSString *sqlString=[NSString stringWithFormat:@"update usuario set celular='%@' where id=%d;",phoneString,[phone.phoneId intValue]];
+    NSString *phoneString=[NSString stringWithFormat:@"('(%@) %@-%@',%d),",areaCode,phonePrefix,phoneSufix,[phone.phoneId intValue]];
+    
+    
+//    NSString *sqlString=[NSString stringWithFormat:@"update usuario set celular='%@' where id=%d;",phoneString,[phone.phoneId intValue]];
+    NSString *sqlString=[NSString stringWithFormat:@"%@",phoneString];
     
     NSLog(@"*** output string = %@",sqlString);
     [self.outputScript addObject:sqlString];
