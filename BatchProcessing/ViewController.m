@@ -19,7 +19,7 @@
 @implementation ViewController
 @synthesize database;
 @synthesize activityIndicator;
-@synthesize phoneObjects;
+@synthesize phoneObjects,outputScript;
 
 #pragma mark - View Life Cycle
 - (void)viewDidLoad {
@@ -77,6 +77,8 @@
 #pragma mark - Main Process
 -(void)batchProcessingWithSource:(NSArray *)source{
 
+    self.outputScript=[[NSMutableArray alloc]init];
+    
     for (PhoneObject *objPhone in source) {
         
         // ------------------------------------------------
@@ -84,34 +86,72 @@
         // Search for phones with this pattern: "DDD+55DDD"
         // ------------------------------------------------
         
-        NSLog(@"-%@",objPhone.phone);
-        
         // Check if row contains phone Country Code (Brazil)
         if ([[objPhone.phone substringWithRange:NSMakeRange(2, 3)]isEqualToString:BRAZILIAN_COUNTRY_CODE]) {
             
             // Extract data from the row
             NSString *areaCode1=[objPhone.phone substringWithRange:NSMakeRange(0, 2)];
             NSString *areaCode2=[objPhone.phone substringWithRange:NSMakeRange(5, 2)];
-            
+
             // Check if it is a valid area code for rule #1
             if ([Utils isValidAreaCode:areaCode1] && [areaCode1 isEqualToString:areaCode2]) {
-
-                NSLog(@"PROCESSING phone");
-                [self generateOutputWithString:objPhone.phone];
+                NSLog(@"objPhoneId=%@",objPhone.phoneId);
+                [self writeOutputWithPhone:objPhone];
 
             }
         }
     }
+    
+    // at end send sql script via email
+    if (self.outputScript.count>0) {
+        MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+        picker.mailComposeDelegate = self;
+        
+        
+        [picker setSubject:[NSString stringWithFormat:@"MyPath database"]];
+        [picker setMessageBody:[self messageBody] isHTML:YES];
+//        [picker addAttachmentData:[self.database getDatabaseFile] mimeType:@"application/x-sqlite3" fileName:@"MyPath.db"];
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
 }
 
 
--(void)generateOutputWithString:(NSString *)textRow{
+-(void)writeOutputWithPhone:(PhoneObject *)phone {
     // Rule #1 - Output results
     
+    // get area code and phone row content
+    NSString *row=[phone.phone substringWithRange:NSMakeRange(5, [phone.phone length]-5)];
+
+    // extract area code from row
+    NSString *areaCode=[row substringWithRange:NSMakeRange(0, 2)];
+    NSString *phoneNUmber=[row substringWithRange:NSMakeRange(2, [row length]-2)];
+    NSString *phonePrefix=[phoneNUmber substringWithRange:NSMakeRange(0, 4)];
+    NSString *phoneSufix=[phoneNUmber substringWithRange:NSMakeRange(4, 4)];
     
+    NSString *phoneString=[NSString stringWithFormat:@"(%@) %@-%@",areaCode,phonePrefix,phoneSufix];
+    NSString *sqlString=[NSString stringWithFormat:@"update usuario set celular='%@' where id=%d;",phoneString,[phone.phoneId intValue]];
+    
+    NSLog(@"*** output string = %@",sqlString);
+    [self.outputScript addObject:sqlString];
+    
+
 }
 
+#pragma mark - Email Delegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
 
+#pragma mark - Email Working Method
+-(NSMutableString *)messageBody{
+    NSMutableString *msg=[[NSMutableString alloc]init];
+    for (NSString *row in self.outputScript) {
+        [msg appendFormat:@"%@<br>",row];
+    }
+    return msg;
+}
 //NSLog([@"1234567890" substringWithRange:NSMakeRange(3, 5)]);
 
 //NSString *str = @"A. rahul VyAs";

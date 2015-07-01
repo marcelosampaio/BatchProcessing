@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "Database.h"
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface ViewController : UIViewController
+
+@interface ViewController : UIViewController<MFMailComposeViewControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,strong) Database *database;
 @property (nonatomic,strong) NSArray *phoneObjects;
+@property (nonatomic,strong) NSMutableArray *outputScript;
+
 
 
 
